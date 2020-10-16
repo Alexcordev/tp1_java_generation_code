@@ -40,14 +40,14 @@ public class GestionEmploye {
 
 
     public static void main(String[] args) {
-        int nombre = 0, annee, monAnnee = 0, mois = 0, nbreJours = 0, totalCodeBisex = 0, codeBisex = 0, sexeM = 0, sexeF = 0, totalSexF = 0, totalSexM = 0;
-        float moyenneFemmes = 0, moyenneHommes = 0;
+        int annee, mois, nbreJours = 0, codeBisex = 0, sexeM = 0, sexeF = 0;
+        float moyenneFemmes, moyenneHommes;
         int codeGenere = 0;
-        int c7 = 0;
-        int c8 = 0;
+        int c7;
+        int c8;
         int c9 = 0;
         char sexe = ' ';
-        String c1 = null, c2 = null, c3 = null, c4 = null, c5 = null, c6 = null;
+        String c1, c2, c3, c4, c5, c6;
 
         //Afficher une petite description (ex : Ce programme sert à générer des codes d’employés, etc)
 
@@ -56,37 +56,34 @@ public class GestionEmploye {
 
         Scanner maSaisie = new Scanner(System.in);
 
-        do {
+        System.out.printf("Veuillez entrer votre année de naissance (Une valeur entre 1950 et 2002 inclusivement) : ");
+        annee = maSaisie.nextInt();
+        if (annee == 0) {
+            System.out.println("FIN NORMALE DU PROGRAMME");
+            System.exit(0);
 
-            System.out.printf("Veuillez entrer votre année de naissance (Une valeur entre 1950 et 2002 inclusivement) : ");
-            annee = maSaisie.nextInt();
-            if (annee == 0) {
-                break;
-            }
+        }
+        while (annee != 0) {
+
 
             while (annee < 1950 || annee > 2002) {
                 System.out.println("Erreur! Veuillez entrer une valeur entre 1950 et 2002 inclusivement");
                 System.out.printf("Veuillez entrer votre année de naissance (Une valeur entre 1950 et 2002 inclusivement) : ");
                 annee = maSaisie.nextInt();
-                if (annee == 0) {
 
-                    break;
-
-                } else {
-                    monAnnee = annee;
-
-                }
 
             }
+
+
             System.out.printf("Veuillez entrer votre mois de naissance (Une valeur entre 1 et 12 inclusivement) : ");
             mois = maSaisie.nextInt();
 
             while (mois < 1 || mois > 12) {
-                    System.out.println("Erreur! Veuillez entrer une valeur entre 1 et 12 inclusivement");
-                    System.out.printf("Veuillez entrer votre mois de naissance (Une valeur entre 1 et 12 inclusivement) : ");
-                    mois = maSaisie.nextInt();
+                System.out.println("Erreur! Veuillez entrer une valeur entre 1 et 12 inclusivement");
+                System.out.printf("Veuillez entrer votre mois de naissance (Une valeur entre 1 et 12 inclusivement) : ");
+                mois = maSaisie.nextInt();
 
-                }
+            }
             boolean anneeEstBissex = annee % 400 == 0 || (annee % 4 == 0 && annee % 100 != 0);
             switch (mois) {
 
@@ -111,7 +108,7 @@ public class GestionEmploye {
                         sexe = maSaisie.next().trim().charAt(0);
                         if (sexe == 'F' || sexe == 'f') {
                             sexeF++;
-                            mois+=70;
+                            mois += 70;
 
                         } else {
                             sexeM++;
@@ -138,7 +135,7 @@ public class GestionEmploye {
                         sexe = maSaisie.next().trim().charAt(0);
                         if (sexe == 'F' || sexe == 'f') {
                             sexeF++;
-                            mois+=70;
+                            mois += 70;
 
                         } else {
                             sexeM++;
@@ -169,7 +166,7 @@ public class GestionEmploye {
                         sexe = maSaisie.next().trim().charAt(0);
                         if (sexe == 'F' || sexe == 'f') {
                             sexeF++;
-                            mois+=70;
+                            mois += 70;
 
                         } else {
                             sexeM++;
@@ -195,7 +192,7 @@ public class GestionEmploye {
                         sexe = maSaisie.next().trim().charAt(0);
                         if (sexe == 'F' || sexe == 'f') {
                             sexeF++;
-                            mois+=70;
+                            mois += 70;
 
                         } else {
                             sexeM++;
@@ -224,10 +221,10 @@ public class GestionEmploye {
 
                         }
                         System.out.printf("Êtes-vous du sexe masculin (m) ou féminin (f) : ");
-                       sexe = maSaisie.next().trim().charAt(0);
+                        sexe = maSaisie.next().trim().charAt(0);
                         if (sexe == 'F' || sexe == 'f') {
                             sexeF++;
-                            mois+=70;
+                            mois += 70;
 
                         } else {
                             sexeM++;
@@ -254,7 +251,7 @@ public class GestionEmploye {
                         sexe = maSaisie.next().trim().charAt(0);
                         if (sexe == 'F' || sexe == 'f') {
                             sexeF++;
-                            mois+=70;
+                            mois += 70;
 
                         } else {
                             sexeM++;
@@ -270,26 +267,26 @@ public class GestionEmploye {
                     }
 
                     break;
-                    }
-        codeGenere++;
+            }
+            codeGenere++;
             //TRAITEMENT DES DONNÉES (CALCULS ET AUTRES)
 
 
             //Les deux premiers chiffres du code correspondent aux deux derniers chiffres de l'année de naissance,
 
-            c1 = String.valueOf(annee).substring(1,1);
-            System.out.println(String.valueOf(annee).substring(1,1));
+            c1 = String.valueOf(annee).substring(1, 1);
+            System.out.println(String.valueOf(annee).substring(1, 1));
             c2 = String.valueOf(annee).substring(2);
         /*les deux chiffres suivants du code sont les deux chiffres du mois de naissance
         (s'il s'agit d'une femme, le mois sera augmenté de la quantité 70)*/
 
             c4 = String.valueOf(mois).substring(1);
-            c3 = String.valueOf(mois).length() == 2 ? String.valueOf(mois).substring(0,1) : "0" + mois;
+            c3 = String.valueOf(mois).length() == 2 ? String.valueOf(mois).substring(0, 1) : "0" + mois;
 
             //ensuite les deux chiffres du jour de naissance.
 
             c6 = String.valueOf(nbreJours).substring(1);
-            c5 = String.valueOf(nbreJours).length() == 2 ? String.valueOf(nbreJours).substring(0,1) : "0"+ nbreJours;
+            c5 = String.valueOf(nbreJours).length() == 2 ? String.valueOf(nbreJours).substring(0, 1) : "0" + nbreJours;
             //Les trois derniers chiffres du code sont déterminés de la façon suivante :
 
             char nouvc5 = '0';
@@ -297,13 +294,13 @@ public class GestionEmploye {
             char nouvc1 = '0';
 
 
-                //nouvc1 = c1.charAt(1);
+            //nouvc1 = c1.charAt(1);
 
             /*int nouv1 = Integer.parseInt(String.valueOf(nouvc1));
             System.out.println("Résultat : " + nouv1);
             System.out.println("Résultat calcul : " + (nouv1 * 2));*/
 
-            for (int i=0; i < c3.length(); i++) {
+            for (int i = 0; i < c3.length(); i++) {
 
                 nouvc3 = c3.charAt(i);
             }
@@ -311,7 +308,7 @@ public class GestionEmploye {
             System.out.println("Résultat : " + nouv3);
             System.out.println("Résultat calcul : " + (nouv3 * 2));
 
-            for (int i=0; i < c5.length(); i++) {
+            for (int i = 0; i < c5.length(); i++) {
 
                 nouvc5 = c5.charAt(i);
             }
@@ -321,14 +318,14 @@ public class GestionEmploye {
             System.out.println("Résultat calcul : " + (nouv5 * 2));
 
             //c7 : le reste après division par 10 de c1 + 7 * c3 + 5 * c5
-            c7 = (7 * nouv3) + (5 * nouv5) %10;
+            c7 = (7 * nouv3) + (5 * nouv5) % 10;
             System.out.println("c7 = " + c7);
 
             //c8 : le reste après division par 10 de 9 * ( c2 + c4 + 2 * c6 )
             char nouvc2 = '0';
             char nouvc4 = '0';
             char nouvc6 = '0';
-            for (int i=0; i < c2.length(); i++) {
+            for (int i = 0; i < c2.length(); i++) {
 
                 nouvc2 = c2.charAt(i);
             }
@@ -337,7 +334,7 @@ public class GestionEmploye {
             System.out.println("Résultat : " + nouv2);
             System.out.println("Résultat calcul : " + (nouv2 * 2));
 
-            for (int i=0; i < c4.length(); i++) {
+            for (int i = 0; i < c4.length(); i++) {
 
                 nouvc4 = c4.charAt(i);
             }
@@ -347,7 +344,7 @@ public class GestionEmploye {
             System.out.println("Résultat calcul : " + (nouv4 * 2));
 
 
-            for (int i=0; i < c6.length(); i++) {
+            for (int i = 0; i < c6.length(); i++) {
 
                 nouvc6 = c6.charAt(i);
             }
@@ -358,7 +355,7 @@ public class GestionEmploye {
 
 
             //c8 : le reste après division par 10 de 9 * ( c2 + c4 + 2 * c6 )
-            c8 = 9 * (nouv2 + nouv4 + 2 * nouv6) %10;
+            c8 = 9 * (nouv2 + nouv4 + 2 * nouv6) % 10;
             System.out.println("c8 = " + c8);
 
             //c9 est un chiffre entre 0 et 9 tel que c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9 est un multiple de 10.
@@ -375,16 +372,22 @@ public class GestionEmploye {
          donc c9 = 0. Le code sera donc 817618270 */
 
 
-
-
-
             System.out.println(sexeF);
             System.out.println(sexeM);
-            System.out.println(c1+c2+c3+c4+c5+c6+"0000000");
+            System.out.println(c1 + c2 + c3 + c4 + c5 + c6 + "0000000");
 
-        } while (/*nombre*/ annee == 0);
-        moyenneFemmes = (float)(sexeF*100)/codeGenere;
-        moyenneHommes = (float)(sexeM*100)/codeGenere;
+            System.out.printf("Veuillez entrer votre année de naissance (Une valeur entre 1950 et 2002 inclusivement) : ");
+            annee = maSaisie.nextInt();
+
+
+        }
+            moyenneFemmes = (float) (sexeF * 100) / codeGenere;
+            moyenneHommes = (float) (sexeM * 100) / codeGenere;
+
+
+
+
+
 
 
         //AFFICHAGE DES RÉSULTATS
