@@ -19,9 +19,22 @@ import java.util.*;
 
 public class GestionEmploye {
     //Déclaration des constantes
+    public static final String FIN_PROGRAMME = "FIN NORMALE DU PROGRAMME";
+    public static final int ANNEE_MIN = 1950;
+    public static final int ANNEE_MAX = 2002;
+    public static final int MOIS_MIN = 1;
+    public static final int MOIS_MAX = 12;
+    public static final int AJOUT_MOIS = 70;
+    public static final String MESSAGE_ERREUR_ANNEE = "Erreur! Veuillez entrer une valeur entre 1950 et 2002 inclusivement";
+    public static final String MESSAGE_ERREUR_MOIS = "Erreur! Veuillez entrer une valeur entre 1 et 12 inclusivement";
+    public static final String MESSAGE_ERREUR_MOIS_28_JOURS = "Erreur! Veuillez entrer une valeur entre 1 et 28 inclusivement";
+    public static final String MESSAGE_ERREUR_MOIS_29_JOURS = "Erreur! Veuillez entrer une valeur entre 1 et 29 inclusivement";
+    public static final String MESSAGE_ERREUR_MOIS_30_JOURS = "Erreur! Veuillez entrer une valeur entre 1 et 30 inclusivement";
+    public static final String MESSAGE_ERREUR_MOIS_31_JOURS = "Erreur! Veuillez entrer une valeur entre 1 et 31 inclusivement";
+    public static final String MESSAGE_ERREUR_SEXE = "Erreur! Veuillez entrer 'f' ou 'm' ";
 
     public static void main(String[] args) {
-        int annee, mois, nbreJours = 0, codeBisex = 0, sexeM = 0, sexeF = 0, c7, c8, c9, codeGenere = 0, code, resultat, leCode = 0;
+        int annee, mois, nbreJours = 0, codeBisex = 0, sexeM = 0, sexeF = 0, c7, c8, c9, codeGenere = 0, code, resultat, leCode;
         float moyenneFemmes, moyenneHommes;
         char sexe = ' ';
         String c1, c2, c3, c4, c5, c6;
@@ -37,35 +50,30 @@ public class GestionEmploye {
         System.out.printf("\nVeuillez entrer votre année de naissance (Une valeur entre 1950 et 2002 inclusivement) (Appuyez sur 0 pour quitter) : ");
         annee = maSaisie.nextInt();
         if (annee == 0) {
-            System.out.println("FIN NORMALE DU PROGRAMME");
+            System.out.println(FIN_PROGRAMME);
             System.exit(0);
 
         }
         while (annee != 0) {
 
-
-            while (annee < 1950 || annee > 2002) {
-                System.out.println("\n\nErreur! Veuillez entrer une valeur entre 1950 et 2002 inclusivement\n");
+            while (annee < ANNEE_MIN || annee > ANNEE_MAX) {
+                System.out.printf("\n\n%s\n", MESSAGE_ERREUR_ANNEE);
                 System.out.printf("Veuillez entrer votre année de naissance (Une valeur entre 1950 et 2002 inclusivement) : ");
                 annee = maSaisie.nextInt();
-
-
             }
-
 
             System.out.printf("\n\nVeuillez entrer votre mois de naissance (Une valeur entre 1 et 12 inclusivement) : ");
             mois = maSaisie.nextInt();
 
-            while (mois < 1 || mois > 12) {
-                System.out.println("\nErreur! Veuillez entrer une valeur entre 1 et 12 inclusivement\n");
+            while (mois < MOIS_MIN || mois > MOIS_MAX) {
+                System.out.printf("\n%s\n", MESSAGE_ERREUR_MOIS);
                 System.out.printf("\nVeuillez entrer votre mois de naissance (Une valeur entre 1 et 12 inclusivement) : ");
                 mois = maSaisie.nextInt();
 
             }
             boolean anneeEstBissex = annee % 400 == 0 || (annee % 4 == 0 && annee % 100 != 0);
+
             switch (mois) {
-
-
                 case 1:
                 case 3:
                 case 5:
@@ -77,16 +85,16 @@ public class GestionEmploye {
                         System.out.printf("\nVeuillez entrer votre jour de naissance (Une valeur entre 1 et 31 inclusivement) : ");
                         nbreJours = maSaisie.nextInt();
                         while (nbreJours < 1 || nbreJours > 31) {
-                            System.out.println("\nErreur! Veuillez entrer une valeur entre 1 et 31 inclusivement\n");
+                            System.out.printf("\n%s\n", MESSAGE_ERREUR_MOIS_31_JOURS);
                             System.out.printf("Veuillez entrer votre jour de naissance (Une valeur entre 1 et 31 inclusivement) : ");
                             nbreJours = maSaisie.nextInt();
-
                         }
+
                         System.out.printf("\n\nÊtes-vous du sexe masculin (m) ou féminin (f) : ");
                         sexe = maSaisie.next().trim().charAt(0);
                         if (sexe == 'f' || sexe == 'F') {
                             sexeF++;
-                            mois += 70;
+                            mois += AJOUT_MOIS;
 
                         } else if (sexe == 'm' || sexe == 'M'){
                             sexeM++;
@@ -94,7 +102,7 @@ public class GestionEmploye {
                         }
 
                         while (sexe != 'F' & sexe != 'f' && sexe != 'M' & sexe != 'm') {
-                            System.out.println("\nErreur! Veuillez entrer 'f' ou 'm' \n");
+                            System.out.printf("\n%s\n", MESSAGE_ERREUR_SEXE);
                             System.out.printf("\nÊtes-vous du sexe masculin (m) ou féminin (f) : ");
                             sexe = maSaisie.next().trim().charAt(0);
 
@@ -104,7 +112,7 @@ public class GestionEmploye {
                         System.out.printf("\nVeuillez entrer votre jour de naissance (Une valeur entre 1 et 31 inclusivement) : ");
                         nbreJours = maSaisie.nextInt();
                         while (nbreJours < 1 || nbreJours > 31) {
-                            System.out.println("\nErreur! Veuillez entrer une valeur entre 1 et 31 inclusivement\n");
+                            System.out.printf("\n%s\n", MESSAGE_ERREUR_MOIS_31_JOURS);
                             System.out.printf("Veuillez entrer votre jour de naissance (Une valeur entre 1 et 31 inclusivement) : ");
                             nbreJours = maSaisie.nextInt();
 
@@ -113,7 +121,7 @@ public class GestionEmploye {
                         sexe = maSaisie.next().trim().charAt(0);
                         if (sexe == 'f' || sexe == 'F') {
                             sexeF++;
-                            mois += 70;
+                            mois += AJOUT_MOIS;
 
                         } else if (sexe == 'm' || sexe == 'M'){
                             sexeM++;
@@ -121,10 +129,9 @@ public class GestionEmploye {
                         }
 
                         while (sexe != 'F' & sexe != 'f' && sexe != 'M' & sexe != 'm') {
-                            System.out.println("\nErreur! Veuillez entrer 'f' ou 'm' ");
+                            System.out.printf("\n%s", MESSAGE_ERREUR_SEXE);
                             System.out.printf("\nÊtes-vous du sexe masculin (m) ou féminin (f) : ");
                             sexe = maSaisie.next().trim().charAt(0);
-
                         }
                     }
 
@@ -135,7 +142,7 @@ public class GestionEmploye {
                         System.out.printf("\nVeuillez entrer votre jour de naissance (Une valeur entre 1 et 29 inclusivement) : ");
                         nbreJours = maSaisie.nextInt();
                         while (nbreJours < 1 || nbreJours > 29) {
-                            System.out.println("\n\nErreur! Veuillez entrer une valeur entre 1 et 29 inclusivement");
+                            System.out.printf("\n\n%s", MESSAGE_ERREUR_MOIS_29_JOURS);
                             System.out.printf("\nVeuillez entrer votre jour de naissance (Une valeur entre 1 et 29 inclusivement) : ");
                             nbreJours = maSaisie.nextInt();
 
@@ -144,7 +151,7 @@ public class GestionEmploye {
                         sexe = maSaisie.next().trim().charAt(0);
                         if (sexe == 'f' || sexe == 'F') {
                             sexeF++;
-                            mois += 70;
+                            mois += AJOUT_MOIS;
 
                         } else if (sexe == 'm' || sexe == 'M'){
                             sexeM++;
@@ -152,7 +159,7 @@ public class GestionEmploye {
                         }
 
                         while (sexe != 'F' & sexe != 'f' && sexe != 'M' & sexe != 'm') {
-                            System.out.println("\nErreur! Veuillez entrer 'f' ou 'm' \n");
+                            System.out.printf("\n%s\n", MESSAGE_ERREUR_SEXE);
                             System.out.printf("Êtes-vous du sexe masculin (m) ou féminin (f) : ");
                             sexe = maSaisie.next().trim().charAt(0);
 
@@ -162,7 +169,7 @@ public class GestionEmploye {
                         System.out.printf("\nVeuillez entrer votre jour de naissance (Une valeur entre 1 et 28 inclusivement) : ");
                         nbreJours = maSaisie.nextInt();
                         while (nbreJours < 1 || nbreJours > 28) {
-                            System.out.println("\nErreur! Veuillez entrer une valeur entre 1 et 28 inclusivement");
+                            System.out.printf("\n%s", MESSAGE_ERREUR_MOIS_28_JOURS);
                             System.out.printf("\nVeuillez entrer votre jour de naissance (Une valeur entre 1 et 28 inclusivement) : ");
                             nbreJours = maSaisie.nextInt();
                         }
@@ -170,7 +177,7 @@ public class GestionEmploye {
                         sexe = maSaisie.next().trim().charAt(0);
                         if (sexe == 'f' || sexe == 'F') {
                             sexeF++;
-                            mois += 70;
+                            mois += AJOUT_MOIS;
 
                         } else if (sexe == 'm' || sexe == 'M'){
                             sexeM++;
@@ -178,7 +185,7 @@ public class GestionEmploye {
                         }
 
                         while (sexe != 'F' & sexe != 'f' && sexe != 'M' & sexe != 'm') {
-                            System.out.println("\nErreur! Veuillez entrer 'f' ou 'm' ");
+                            System.out.printf("\n%s", MESSAGE_ERREUR_SEXE);
                             System.out.printf("\nÊtes-vous du sexe masculin (m) ou féminin (f) : ");
                             sexe = maSaisie.next().trim().charAt(0);
 
@@ -192,8 +199,8 @@ public class GestionEmploye {
                     if (anneeEstBissex) {
                         System.out.printf("\nVeuillez entrer votre jour de naissance (Une valeur entre 1 et 30 inclusivement) : ");
                         nbreJours = maSaisie.nextInt();
-                        while (nbreJours < 1 || nbreJours > 31) {
-                            System.out.println("\nErreur! Veuillez entrer une valeur entre 1 et 30 inclusivement");
+                        while (nbreJours < 1 || nbreJours > 30) {
+                            System.out.printf("\n%s", MESSAGE_ERREUR_MOIS_30_JOURS);
                             System.out.printf("\nVeuillez entrer votre jour de naissance (Une valeur entre 1 et 30 inclusivement) : ");
                             nbreJours = maSaisie.nextInt();
 
@@ -202,7 +209,7 @@ public class GestionEmploye {
                         sexe = maSaisie.next().trim().charAt(0);
                         if (sexe == 'f' || sexe == 'F') {
                             sexeF++;
-                            mois += 70;
+                            mois += AJOUT_MOIS;
 
                         } else if (sexe == 'm' || sexe == 'M'){
                             sexeM++;
@@ -210,7 +217,7 @@ public class GestionEmploye {
                         }
 
                         while (sexe != 'F' & sexe != 'f' && sexe != 'M' & sexe != 'm') {
-                            System.out.println("\nErreur! Veuillez entrer 'f' ou 'm' \n");
+                            System.out.printf("\n%s\n", MESSAGE_ERREUR_SEXE);
                             System.out.printf("Êtes-vous du sexe masculin (m) ou féminin (f) : ");
                             sexe = maSaisie.next().trim().charAt(0);
 
@@ -219,8 +226,8 @@ public class GestionEmploye {
                     } else {
                         System.out.printf("\nVeuillez entrer votre jour de naissance (Une valeur entre 1 et 30 inclusivement) : ");
                         nbreJours = maSaisie.nextInt();
-                        while (nbreJours < 1 || nbreJours > 31) {
-                            System.out.println("\nErreur! Veuillez entrer une valeur entre 1 et 30 inclusivement");
+                        while (nbreJours < 1 || nbreJours > 30) {
+                            System.out.printf("\n%s", MESSAGE_ERREUR_MOIS_30_JOURS);
                             System.out.printf("\nVeuillez entrer votre jour de naissance (Une valeur entre 1 et 30 inclusivement) : ");
                             nbreJours = maSaisie.nextInt();
 
@@ -229,7 +236,7 @@ public class GestionEmploye {
                         sexe = maSaisie.next().trim().charAt(0);
                         if (sexe == 'f' || sexe == 'F') {
                             sexeF++;
-                            mois += 70;
+                            mois += AJOUT_MOIS;
 
                         } else if (sexe == 'm' || sexe == 'M'){
                             sexeM++;
@@ -238,7 +245,7 @@ public class GestionEmploye {
 
                         while (sexe != 'F' & sexe != 'f' && sexe != 'M' & sexe != 'm') {
                             System.out.println("\nErreur! Veuillez entrer 'f' ou 'm' ");
-                            System.out.printf("\nÊtes-vous du sexe masculin (m) ou féminin (f) : ");
+                            System.out.printf("\n%s", MESSAGE_ERREUR_SEXE);
                             sexe = maSaisie.next().trim().charAt(0);
 
                         }
@@ -264,45 +271,38 @@ public class GestionEmploye {
             c6 = String.valueOf(nbreJours).substring(1);
             c5 = String.valueOf(nbreJours).length() == 2 ? String.valueOf(nbreJours).substring(0, 1) : "0" + nbreJours;
 
-            char nouvc5 = '0';
-            char nouvc3 = '0';
+
             char nouvc1 = '0';
-            nouvc1 = c1.charAt(0);
-
-            int nouv1 = nouvc1 - '0';;
-
-            for (int i = 0; i < c3.length(); i++) {
-
-                nouvc3 = c3.charAt(i);
-            }
-            int nouv3 = nouvc3 - '0';;
-
-            for (int i = 0; i < c5.length(); i++) {
-
-                nouvc5 = c5.charAt(i);
-            }
-
-            int nouv5 = nouvc5 - '0';
-
             char nouvc2 = '0';
+            char nouvc3 = '0';
             char nouvc4 = '0';
+            char nouvc5 = '0';
             char nouvc6 = '0';
 
-            for (int i = 0; i < c2.length(); i++) {
+            nouvc1 = c1.charAt(0);
+            int nouv1 = nouvc1 - '0';;
 
+            for (int i = 0; i < c2.length(); i++) {
                 nouvc2 = c2.charAt(i);
             }
             int nouv2 = nouvc2 - '0';;
 
-            for (int i = 0; i < c4.length(); i++) {
+            for (int i = 0; i < c3.length(); i++) {
+                nouvc3 = c3.charAt(i);
+            }
+            int nouv3 = nouvc3 - '0';
 
+            for (int i = 0; i < c4.length(); i++) {
                 nouvc4 = c4.charAt(i);
             }
-
             int nouv4 = nouvc4 - '0';;
 
-            for (int i = 0; i < c6.length(); i++) {
+            for (int i = 0; i < c5.length(); i++) {
+                nouvc5 = c5.charAt(i);
+            }
+            int nouv5 = nouvc5 - '0';
 
+            for (int i = 0; i < c6.length(); i++) {
                 nouvc6 = c6.charAt(i);
             }
             int nouv6 = nouvc6 - '0';;
@@ -317,9 +317,7 @@ public class GestionEmploye {
             //c9 est un chiffre entre 0 et 9 tel que c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9 est un multiple de 10.
             code = nouv1 + nouv2 + nouv3 + nouv4 + nouv5 + nouv6 + c7 + c8;
             resultat = code%10;
-
-                leCode = resultat;
-
+            leCode = resultat;
             c9 = leCode;
 
             System.out.println("\n-------------------------");
