@@ -34,10 +34,10 @@ public class GestionEmploye {
     public static final String MESSAGE_ERREUR_SEXE = "Erreur! Veuillez entrer 'f' ou 'm' ";
 
     public static void main(String[] args) {
-        int annee, mois, nbreJours = 0, codeBisex = 0, sexeM = 0, sexeF = 0, c7, c8, c9, codeGenere = 0, code, resultat, leCode;
+        int annee, mois, nbreJours = 0, codeBisex = 0, sexeM = 0, sexeF = 0, codeGenere = 0, code = 0, resultat, leCode;
         float moyenneFemmes, moyenneHommes;
         char sexe = ' ';
-        String c1, c2, c3, c4, c5, c6;
+        String monAnnee1, monAnnee2, monMois1, monMois2, monJour1, monJour2;
 
         //Afficher une petite description (ex : Ce programme sert à générer des codes d’employés, etc)
         System.out.println("\n\nCe programme en java sert à générer des codes d'employés à 9 chiffres.\nL'utilisateur doit entrer l'année, " +
@@ -259,63 +259,42 @@ public class GestionEmploye {
 
 
             //Les deux premiers chiffres du code correspondent aux deux derniers chiffres de l'année de naissance,
-            c2 = String.valueOf(annee).substring(2);
-            c1 = c2.substring(0,1);
+            monAnnee2 = String.valueOf(annee).substring(2);
+            monAnnee1 = String.valueOf(annee).substring(1,1);
 
-        /*les deux chiffres suivants du code sont les deux chiffres du mois de naissance
-        (s'il s'agit d'une femme, le mois sera augmenté de la quantité 70)*/
-            c4 = String.valueOf(mois).substring(1);
-            c3 = String.valueOf(mois).length() == 2 ? String.valueOf(mois).substring(0, 1) : "0" + mois;
+            /*les deux chiffres suivants du code sont les deux chiffres du mois de naissance
+            (s'il s'agit d'une femme, le mois sera augmenté de la quantité 70)*/
+            monMois2 = String.valueOf(mois).substring(1);
+            monMois1 = String.valueOf(mois).length() == 2 ? String.valueOf(mois).substring(0, 1) : "0" + mois;
 
             //ensuite les deux chiffres du jour de naissance.
-            c6 = String.valueOf(nbreJours).substring(1);
-            c5 = String.valueOf(nbreJours).length() == 2 ? String.valueOf(nbreJours).substring(0, 1) : "0" + nbreJours;
+            monJour2 = String.valueOf(nbreJours).substring(1);
+            monJour1 = String.valueOf(nbreJours).length() == 2 ? String.valueOf(nbreJours).substring(0, 1) : "0" + nbreJours;
 
 
-            char nouvc1 = '0';
-            char nouvc2 = '0';
-            char nouvc3 = '0';
-            char nouvc4 = '0';
-            char nouvc5 = '0';
-            char nouvc6 = '0';
+            String dateLongue =monAnnee1+monAnnee2+monMois1+monMois2+monJour1+monJour2;
 
-            nouvc1 = c1.charAt(0);
-            int nouv1 = nouvc1 - '0';;
+            int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7, c8, c9;
 
-            for (int i = 0; i < c2.length(); i++) {
-                nouvc2 = c2.charAt(i);
+
+            for (int i = 0; i < dateLongue.length(); i++) {
+                 c1 = dateLongue.charAt(0) - '0';
+                 c2 = dateLongue.charAt(1) - '0';
+                 c3 = dateLongue.charAt(2) - '0';
+                 c4 = dateLongue.charAt(3) - '0';
+                 c5 = dateLongue.charAt(4) - '0';
+                 c6 = dateLongue.charAt(5) - '0';
+
             }
-            int nouv2 = nouvc2 - '0';;
-
-            for (int i = 0; i < c3.length(); i++) {
-                nouvc3 = c3.charAt(i);
-            }
-            int nouv3 = nouvc3 - '0';
-
-            for (int i = 0; i < c4.length(); i++) {
-                nouvc4 = c4.charAt(i);
-            }
-            int nouv4 = nouvc4 - '0';;
-
-            for (int i = 0; i < c5.length(); i++) {
-                nouvc5 = c5.charAt(i);
-            }
-            int nouv5 = nouvc5 - '0';
-
-            for (int i = 0; i < c6.length(); i++) {
-                nouvc6 = c6.charAt(i);
-            }
-            int nouv6 = nouvc6 - '0';;
-
 
             //c7 : le reste après division par 10 de c1 + 7 * c3 + 5 * c5
-            c7 = (nouv1 + 7 * nouv3 + 5 * nouv5) % 10;
+            c7 = (c1 + 7 * c3 + 5 * c5) % 10;
 
             //c8 : le reste après division par 10 de 9 * ( c2 + c4 + 2 * c6 )
-            c8 = 9 * (nouv2 + nouv4 + 2 * nouv6) % 10;
+            c8 = 9 * (c2 + c4 + 2 * c6) % 10;
 
             //c9 est un chiffre entre 0 et 9 tel que c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9 est un multiple de 10.
-            code = nouv1 + nouv2 + nouv3 + nouv4 + nouv5 + nouv6 + c7 + c8;
+            code = c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8;
             resultat = code%10;
             leCode = resultat;
             c9 = leCode;
@@ -325,7 +304,7 @@ public class GestionEmploye {
             System.out.printf("| CODE D'EMPLOYÉ GÉNÉRÉ |\n");
             System.out.printf("|                       |\n");
             System.out.printf("-------------------------\n");
-            System.out.printf("        %s           \n",c1.substring(1,1) + c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9);
+            System.out.printf("|       %d%d%d%d%d%d%d%d%d       |\n",c1, c2, c3, c4, c5, c6, c7, c8, c9);
             System.out.printf("-------------------------\n\n");
 
 
